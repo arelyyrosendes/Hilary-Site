@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/theme.ts","./src/components/artworkcard.tsx","./src/data/artworks.ts","./src/pages/comics.tsx","./src/pages/contact.tsx","./src/pages/digital.tsx","./src/pages/drawing.tsx","./src/pages/gallery.tsx","./src/pages/home.tsx","./src/pages/painting.tsx","./src/pages/sculpture.tsx"],"version":"5.9.3"}
