@@ -159,24 +159,23 @@ export function SculpturePage() {
       <div style={{ position: "relative", zIndex: 1, padding: "52px 48px 0" }}>
 
         {/* Category label — stamped feel */}
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 10,
-          fontFamily: "'Cormorant Garamond', Georgia, serif",
-          fontSize: 11,
-          fontWeight: 600,
-          letterSpacing: "0.22em",
-          textTransform: "uppercase",
-          color: "#9B6545",
-          opacity: 0.75,
-          marginBottom: 20,
-        }}>
-          {/* Small clay-stamp diamond */}
-          <svg width="8" height="8" viewBox="0 0 8 8">
+        <div
+          style={{
+            display: "block",
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            fontSize: 11,
+            fontWeight: 600,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "#9B6545",
+            opacity: 0.75,
+            marginBottom: 10,
+          }}
+        >
+          <svg width="8" height="8" viewBox="0 0 8 8" style={{ marginRight: 10, verticalAlign: "middle" }}>
             <rect x="1" y="1" width="6" height="6" fill="#9B6545" transform="rotate(45 4 4)" opacity="0.8" />
           </svg>
-          Medium
+          <span style={{ position: "relative", top: 1 }}>Medium</span>
         </div>
 
         <SculptureTitle />

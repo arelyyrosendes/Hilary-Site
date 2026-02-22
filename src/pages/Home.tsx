@@ -57,7 +57,7 @@ export function HomePage({ setPage }: { setPage: (p: Page) => void }) {
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+      <div className="art-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
         {featuredOnHome.map((art, i) => (
           <ArtworkCard key={i} {...art} onClick={() => setPage(art.category as Page)} />
         ))}

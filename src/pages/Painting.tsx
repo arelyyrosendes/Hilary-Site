@@ -1,4 +1,5 @@
 import { GalleryTemplate } from "./Gallery";
+import { ArtworkCard } from "../components/ArtworkCard";
 
 // Oil paint color swatches — palette knife strokes
 const PaletteStrokes = () => (
@@ -188,18 +189,18 @@ export function PaintingPage() {
       <div style={{ position: "relative", zIndex: 1, padding: "52px 48px 0" }}>
 
         {/* Category label */}
-        <div style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: 8,
-          fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: 11,
-          fontStyle: "italic",
-          letterSpacing: "0.1em",
-          color: "#9B5E3A",
-          opacity: 0.7,
-          marginBottom: 20,
-        }}>
+        <div
+          style={{
+            display: "block",
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: 11,
+            fontStyle: "italic",
+            letterSpacing: "0.1em",
+            color: "#9B5E3A",
+            opacity: 0.7,
+            marginBottom: 10,
+          }}
+        >
           — Medium
         </div>
 
@@ -244,6 +245,7 @@ export function PaintingPage() {
             background: "transparent",
             text: "#2A1A0E",
           }}
+          renderCard={(art, i) => <ArtworkCard key={i} {...art} stackMediumAboveTitle />}
         />
       </div>
     </div>

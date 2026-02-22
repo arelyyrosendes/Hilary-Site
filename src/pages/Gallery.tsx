@@ -13,9 +13,10 @@ type GalleryProps = {
   description: string;
   title?: string;
   theme?: GalleryTheme;
+  renderCard?: (art: (typeof artworks)[string][number], index: number) => React.ReactNode;
 };
 
-export function GalleryTemplate({ category, description, title, theme }: GalleryProps) {
+export function GalleryTemplate({ category, description, title, theme, renderCard }: GalleryProps) {
   const works = artworks[category] || [];
   const accent = theme?.accent ?? palette.accent;
   const bg = theme?.background ?? "transparent";
@@ -64,10 +65,10 @@ export function GalleryTemplate({ category, description, title, theme }: Gallery
       </div>
 
       <div style={{ paddingTop: 28 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
-          {works.map((art, i) => (
-            <ArtworkCard key={i} {...art} />
-          ))}
+        <div className="art-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10 }}>
+          {works.map((art, i) =>
+            renderCard ? renderCard(art, i) : <ArtworkCard key={i} {...art} />
+          )}
         </div>
         <div
           style={{

@@ -54,7 +54,7 @@ export function ContactPage() {
         </div>
         <div style={{ marginTop: 48 }}>
           <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: palette.muted, lineHeight: 1.7 }}>
-            Currently in my senior year at UCSC, completing a degree in Arts. Open to opportunities in the Bay Area and beyond starting June 2025.
+            Currently in my senior year at UCSC, completing a degree in Arts. Open to opportunities in Santa Cruz and/or Los Angeles.
           </div>
         </div>
       </div>

@@ -166,7 +166,7 @@ export function ComicsPage() {
             margin: 0,
             letterSpacing: "0.015em",
           }}>
-             Comics & sequential description.
+            Short and long-form comics exploring pacing, rhythm, and how negative space carries emotion. Pages mix brush pen grit with digital tone, risograph layers, and limited color to keep the focus on gesture, expression, and the beat between panels.
           </p>
         </div>
 

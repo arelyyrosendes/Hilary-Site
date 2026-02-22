@@ -2,7 +2,9 @@ import { useState } from "react";
 
 export type Artwork = { title: string; medium: string; year: string; color: string };
 
-export function ArtworkCard({ title, medium, year, color, onClick }: Artwork & { onClick?: () => void }) {
+type CardProps = Artwork & { onClick?: () => void; stackMediumAboveTitle?: boolean };
+
+export function ArtworkCard({ title, medium, year, color, onClick, stackMediumAboveTitle }: CardProps) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -51,20 +53,36 @@ export function ArtworkCard({ title, medium, year, color, onClick }: Artwork & {
           transition: "transform 0.3s ease",
         }}
       >
-        <div style={{ color: "#fff", fontFamily: "'Libre Baskerville', Georgia, serif", fontSize: 14, fontWeight: 400, marginBottom: 2 }}>
+        {stackMediumAboveTitle && (
+          <div
+            style={{
+              color: "rgba(255,255,255,0.75)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 11,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              marginBottom: 4,
+            }}
+          >
+            {medium} · {year}
+          </div>
+        )}
+        <div style={{ color: "#fff", fontFamily: "'Libre Baskerville', Georgia, serif", fontSize: 14, fontWeight: 400, marginBottom: stackMediumAboveTitle ? 0 : 2 }}>
           {title}
         </div>
-        <div
-          style={{
-            color: "rgba(255,255,255,0.65)",
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 11,
-            letterSpacing: "0.06em",
-            textTransform: "uppercase",
-          }}
-        >
-          {medium} · {year}
-        </div>
+        {!stackMediumAboveTitle && (
+          <div
+            style={{
+              color: "rgba(255,255,255,0.65)",
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 11,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+            }}
+          >
+            {medium} · {year}
+          </div>
+        )}
       </div>
     </div>
   );
