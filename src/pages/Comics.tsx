@@ -106,7 +106,7 @@ export function ComicsPage() {
       {/* Google Font for comic title */}
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');`}</style>
 
-      {/* Decorative background layers injected before GalleryTemplate renders */}
+      {/* Decorative background */}
       <div style={{
         position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
         background: "radial-gradient(circle at 20% 30%, #1E1E2E 0, rgba(30,30,46,0.6) 45%), #0f1115",

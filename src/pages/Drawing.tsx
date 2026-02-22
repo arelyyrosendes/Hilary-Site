@@ -11,7 +11,6 @@ const SketchLines = () => (
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
-    {/* Loose hatching lines across background */}
     {Array.from({ length: 38 }).map((_, i) => (
       <line
         key={i}
@@ -95,7 +94,6 @@ const DrawingTitle = () => (
       color: "#1a1a18",
       margin: 0,
       lineHeight: 1,
-      // Slightly uneven baseline via subtle text-shadow stack = hand-drawn feel
       textShadow: "1px 1px 0 rgba(26,26,24,0.12), 0 0 1px rgba(26,26,24,0.08)",
     }}>
       Drawing

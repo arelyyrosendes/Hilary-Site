@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { GalleryTemplate } from "./Gallery";
 
-// Animated grid of pixel-like cells that flicker — nods to both code and pixelated art
+// Animated grid of pixel-like cells
 const PixelGrid = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -37,7 +37,6 @@ const PixelGrid = () => {
 
       for (let i = 0; i < cells.length; i++) {
         const c = cells[i];
-        // Very occasionally pick a new target brightness
         if (Math.random() < 0.0015) {
           c.target = Math.random() < 0.03 ? Math.random() * 0.22 : Math.random() * 0.035;
           if (Math.random() < 0.1) c.color = colors[Math.floor(Math.random() * colors.length)];
@@ -144,7 +143,7 @@ const GlitchTitle = () => {
   );
 };
 
-// Animated color palette chips — a nod to the artist's color theory work
+// Animated color palette chips
 const ColorPalette = () => {
   const swatches = ["#22D3EE", "#818CF8", "#F472B6", "#34D399", "#FBBF24", "#F87171"];
   return (
