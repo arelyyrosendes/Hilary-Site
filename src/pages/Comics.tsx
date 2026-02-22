@@ -77,7 +77,7 @@ const ComicsTitle = () => (
         whiteSpace: "nowrap",
       }}
     >
-      COMICS & SEQUENTIAL
+      COMICS
     </h1>
     {/* Main title */}
     <h1
