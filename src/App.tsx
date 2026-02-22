@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ContactPage } from "./pages/Contact";
 import { HomePage } from "./pages/Home";
 import { PAGES, Page } from "./data/artworks";
@@ -23,13 +23,74 @@ export default function App() {
   // Include Home so it shows in the nav instead of being hidden behind the logo only
   const navPages: Page[] = ["Home", ...PAGES.filter(p => p !== "Home")];
 
+  // URL routing helpers: page -> path and path -> page
+  const pageToPath = useMemo<Record<Page, string>>(
+    () => ({
+      Home: "/",
+      Painting: "/painting",
+      Drawing: "/drawing",
+      Comics: "/comics",
+      Digital: "/digital",
+      Sculpture: "/sculpture",
+      Contact: "/contact",
+    }),
+    []
+  );
+
+  // Lenient path -> page resolver (case-insensitive, ignores trailing slash and extra segments)
+  const derivePageFromPath = (path: string): Page => {
+    const normalized = (path || "/")
+      .split("?")[0]
+      .replace(/\/+$/, "") || "/";
+    const segment = normalized.toLowerCase().split("/")[1] || "";
+    switch (segment) {
+      case "":
+        return "Home";
+      case "painting":
+        return "Painting";
+      case "drawing":
+        return "Drawing";
+      case "comics":
+        return "Comics";
+      case "digital":
+        return "Digital";
+      case "sculpture":
+        return "Sculpture";
+      case "contact":
+        return "Contact";
+      default:
+        return "Home";
+    }
+  };
+
+  // Scroll to the top whenever the active page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [activePage]);
+
   const headerBg = isComics ? "#0f1115" : isDrawing ? "#F0EDE6" : isDigital ? "#080f1a" : isSculpture ? "#EAE0D2" : isPainting ? "#FAF4EB" : palette.cream;
   const headerBorder = isComics ? "rgba(127,90,240,0.25)" : isDrawing ? "rgba(26,26,24,0.12)" : isDigital ? "rgba(34,211,238,0.1)" : isSculpture ? "rgba(155,101,69,0.18)" : isPainting ? "rgba(201,85,42,0.15)" : palette.pale;
 
   const navigate = (page: Page) => {
+    const targetPath = pageToPath[page];
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, "", targetPath);
+    }
     setActivePage(page);
     setSidebarOpen(false);
   };
+
+  // On first load, sync page to URL path (e.g., /comics keeps you on Comics)
+  useEffect(() => {
+    setActivePage(derivePageFromPath(window.location.pathname || "/"));
+  }, []);
+
+  // Keep page in sync when user hits back/forward
+  useEffect(() => {
+    const handler = () => setActivePage(derivePageFromPath(window.location.pathname || "/"));
+    window.addEventListener("popstate", handler);
+    return () => window.removeEventListener("popstate", handler);
+  }, []);
 
   return (
     <div style={{ background: palette.cream, minHeight: "100vh", color: palette.ink, overflowX: "hidden" }}>
@@ -310,7 +371,7 @@ export default function App() {
           <div className="content-padded" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 48px", position: "relative", display: "flex", alignItems: "center", height: 64 }}>
             {/* Logo */}
             <button
-              onClick={() => setActivePage("Home")}
+              onClick={() => navigate("Home")}
               className="nav-logo"
               style={{
                 fontFamily: isComics ? "'Bangers', 'Impact', sans-serif" : isDrawing ? "'EB Garamond', Georgia, serif" : isDigital ? "'Space Mono', monospace" : isSculpture ? "'Cormorant Garamond', Georgia, serif" : isPainting ? "'Playfair Display', Georgia, serif" : "'Libre Baskerville', Georgia, serif",
@@ -334,7 +395,7 @@ export default function App() {
                 return (
                   <button
                     key={page}
-                    onClick={() => setActivePage(page)}
+                    onClick={() => navigate(page)}
                     className="nav-btn"
                     style={{
                       fontFamily: isComics ? "'Courier New', monospace" : isDrawing ? "'EB Garamond', Georgia, serif" : isDigital ? "'Space Mono', monospace" : isSculpture ? "'Cormorant Garamond', Georgia, serif" : isPainting ? "'Playfair Display', Georgia, serif" : "'DM Sans', sans-serif",
@@ -360,7 +421,7 @@ export default function App() {
         </header>
 
         <main className="content-padded" style={{ maxWidth: 1100, margin: "0 auto", padding: "0 48px 80px" }}>
-          {activePage === "Home" && <HomePage setPage={setActivePage} />}
+          {activePage === "Home" && <HomePage setPage={navigate} />}
           {activePage === "Contact" && <ContactPage />}
           {activePage === "Painting" && <PaintingPage />}
           {activePage === "Drawing" && <DrawingPage />}

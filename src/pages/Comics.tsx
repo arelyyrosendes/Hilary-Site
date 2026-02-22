@@ -95,7 +95,7 @@ const ComicsTitle = () => (
         textShadow: "0 0 40px rgba(127,90,240,0.4)",
       }}
     >
-      COMICS & SEQUENTIAL
+      COMICS
     </h1>
   </div>
 );
